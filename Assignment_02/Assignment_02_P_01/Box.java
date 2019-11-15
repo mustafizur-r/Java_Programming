@@ -7,11 +7,6 @@ public class Box {
        this.width = width;
        this.height = height;
     }
-    int area(){
-        return (length*width);
-    }
-    int volume(){
-        return (length*width*height);
-    }
+    
 
 }
