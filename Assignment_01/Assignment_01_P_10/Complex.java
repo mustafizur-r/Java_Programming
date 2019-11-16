@@ -30,7 +30,7 @@ public class Complex {
         System.out.println(real+" +i "+imag);
     }
     
-    
+    //Getter and Setter methods
     
     public float getReal() {
         return real;
