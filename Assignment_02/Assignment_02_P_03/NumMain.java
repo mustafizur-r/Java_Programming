@@ -1,7 +1,8 @@
 package Assignment_02_P_03;
 
 public class NumMain extends NumOfOccur {
-       char ch = 'n';
+       char ch;
+       
 
 
     int calNumOfOccur(char ch) {
