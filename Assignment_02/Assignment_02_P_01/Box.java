@@ -1,12 +1,13 @@
 package Assignment_02_P_01;
 
 public class Box {
-    int length,width,height;
-    Box(int length, int width,int height){
+    int length,width;
+    Box(int length, int width){
        this.length = length;
        this.width = width;
-       this.height = height;
+       
     }
-    
-
+    int area(){
+        return (length*width);
+    }
 }
