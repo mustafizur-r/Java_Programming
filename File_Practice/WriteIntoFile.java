@@ -9,6 +9,7 @@ public class WriteIntoFile {
     void WriteData(){
         try {
             Formatter formatter = new Formatter("C:/Users/SAJU/Documents/saju/Saju/Student.txt");
+             //C:/Users/SAJU/Documents/saju/Saju/Student.txt ----> Change The Path
             System.out.print("How Many Students :");
             int n = input.nextInt();
             for(int i = 0; i<n ; i++){
