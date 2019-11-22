@@ -7,6 +7,7 @@ public class ReadFromFile {
     void ReadData(){
         try{
             File file = new File("C:/Users/SAJU/Documents/saju/Saju/Student.txt");
+            //C:/Users/SAJU/Documents/saju/Saju/Student.txt ----> Change The Path
             Scanner input = new Scanner(file);
             while (input.hasNext()){
                 String id = input.next();
