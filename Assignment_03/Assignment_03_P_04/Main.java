@@ -1,3 +1,5 @@
+//Out Of Assignment....Please see the Picture Output_Layou.png
+
 package Assignment_03_P_04;
 
 import java.awt.*;
@@ -95,6 +97,7 @@ public class Main extends JFrame{
         //Menubar Create
         mfile = new JMenu("File");
         mfile.setForeground(Color.blue);
+        
         //for MenuItem
         openfile = new JMenuItem("Open File");
         mfile.add(openfile);
@@ -103,7 +106,8 @@ public class Main extends JFrame{
         saveas = new JMenuItem("Save As");
         mfile.add(saveas);
         mb.add(mfile);
-
+      
+       //For menubar
         mopen = new JMenu("Open");
         mopen.setForeground(Color.blue);
         mb.add(mopen);
