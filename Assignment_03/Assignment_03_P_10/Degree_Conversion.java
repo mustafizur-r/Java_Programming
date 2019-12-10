@@ -1,6 +1,5 @@
-
 package Assignment_03_P_10;
-import Assignment_03_P_06.Combo_Radio_CheckBox;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -48,9 +47,9 @@ public class Degree_Conversion  extends JFrame{
            @Override
            public void actionPerformed(ActionEvent e) {
                double celsius, fahrenheit;
-               celsius = Double.parseDouble(t1.getText());
-               fahrenheit = (celsius*9)/5+32;
-               t2.setText(String.valueOf(String.format("%.2f", fahrenheit)));
+               fahrenheit = Double.parseDouble(t1.getText());
+               celsius = 5*(fahrenheit-32)/9;
+               t2.setText(String.valueOf(String.format("%.2f", celsius)));
              
             
            }
@@ -62,7 +61,7 @@ public class Degree_Conversion  extends JFrame{
     public static void main(String[] args) {
         Degree_Conversion ob = new Degree_Conversion();
         ob.setBounds(400,100,700,500);
-        ob.setTitle("Student Details");
+        ob.setTitle("Fahrenheit To Celsius");
         ob.setResizable(false);
         ob.setVisible(true);
         ob.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
