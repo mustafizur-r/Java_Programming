@@ -5,7 +5,7 @@ import java.sql.*;
 
 public class Main {
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        String url = "jdbc:mysql://127.0.0.1/database_assignment";
+        String url = "jdbc:mysql://127.0.0.1/database_assignment"; //database_assignment is the table name
         String user = "root";
         String pass= "";
         String query = "SELECT * FROM `info` WHERE id = 1";
