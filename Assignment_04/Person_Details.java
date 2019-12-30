@@ -1,4 +1,5 @@
-package Assignment_04;
+
+package assignment_04;
 
 import javax.swing.*;
 import java.awt.*;
@@ -135,6 +136,35 @@ public class Person_Details extends JFrame {
         upbtn.setBounds(160,400,110,30);
         upbtn.setFont(new Font("Arial", Font.BOLD, 20));
         c.add(upbtn);
+        upbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String sql = "update persondetails set FirstName=?,MiddleName=?,LastName=?,Email=?,Phone=? where id=?";
+                    PreparedStatement pstmt = conn.prepareStatement(sql);
+                    pstmt.setInt(6,Integer.parseInt(idtxt.getText()));
+                    pstmt.setString(1,ftxt.getText());
+                    pstmt.setString(2,mtxt.getText());
+                    pstmt.setString(3,ltxt.getText());
+                    pstmt.setString(4,etxt.getText());
+                    pstmt.setString(5,phtxt.getText());
+
+                    //For executeUpdate
+                    pstmt.executeUpdate();
+                    JOptionPane.showMessageDialog(null,"Updated Person Details Successfully");
+                    //conn.close();
+                    idtxt.setText("");
+                    ftxt.setText("");
+                    mtxt.setText("");
+                    ltxt.setText("");
+                    etxt.setText("");
+                    phtxt.setText("");
+                }
+                catch (Exception u) {
+                    JOptionPane.showMessageDialog(null,"Please Fill All The TextField");
+                }
+            }
+        });
 
         delbtn = new JButton("Delete");
         delbtn.setBackground(Color.BLACK);
@@ -142,6 +172,27 @@ public class Person_Details extends JFrame {
         delbtn.setBounds(270,400,110,30);
         delbtn.setFont(new Font("Arial", Font.BOLD, 20));
         c.add(delbtn);
+        delbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    String sql = "delete from persondetails where id=?";
+                    PreparedStatement pstmt = conn.prepareStatement(sql);
+                    pstmt.setInt(1,Integer.parseInt(idtxt.getText()));
+                    pstmt.executeUpdate();
+                    JOptionPane.showMessageDialog(null,"Person Details Delete Successfully");
+                    //conn.close();
+                    idtxt.setText("");
+                    ftxt.setText("");
+                    mtxt.setText("");
+                    ltxt.setText("");
+                    etxt.setText("");
+                    phtxt.setText("");
+                } catch (Exception d) {
+                    JOptionPane.showMessageDialog(null,"Please Fill All The TextField");
+                }
+            }   
+        });
 
 
         firstbtn = new JButton("First");
@@ -150,6 +201,12 @@ public class Person_Details extends JFrame {
         firstbtn.setBounds(380,400,110,30);
         firstbtn.setFont(new Font("Arial", Font.BOLD, 20));
         c.add(firstbtn);
+        firstbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
 
         prebtn = new JButton("Prev");
         prebtn.setBackground(Color.BLACK);
@@ -186,9 +243,5 @@ public class Person_Details extends JFrame {
         ob.setDefaultCloseOperation(ob.EXIT_ON_CLOSE);
         ob.setResizable(false);
     }
-
-
-
-
 
 }
