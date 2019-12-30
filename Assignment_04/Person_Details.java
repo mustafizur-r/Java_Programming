@@ -9,6 +9,7 @@ import java.sql.*;
 public class Person_Details extends JFrame {
     private Container c;
     public Connection conn;
+    int next = 1;
     private JLabel plabel,idlabel,flabel,mlabel,Llabel,elabel,phlabel;
     public JTextField idtxt,ftxt,mtxt,ltxt,etxt,phtxt;
     public JButton newbtn,upbtn,delbtn,firstbtn,prebtn,nextbtn,lastbtn;
@@ -231,6 +232,29 @@ public class Person_Details extends JFrame {
         prebtn.setBounds(490,400,110,30);
         prebtn.setFont(new Font("Arial", Font.BOLD, 20));
         c.add(prebtn);
+        prebtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                --next;
+                try{
+                    String sql = "SELECT * FROM persondetails where id = ?";
+                    PreparedStatement pstmt = conn.prepareStatement(sql);
+                    pstmt.setInt(1,next);
+                    ResultSet rs = pstmt.executeQuery();
+                    if(rs.next()){
+                        idtxt.setText(String.valueOf(rs.getInt("Id")));
+                        ftxt.setText(rs.getString("FirstName"));
+                        mtxt.setText(rs.getString("MiddleName"));
+                        ltxt.setText(rs.getString("LastName"));
+                        etxt.setText(rs.getString("Email"));
+                        phtxt.setText(rs.getString("Phone"));
+                    }
+
+                }catch (Exception f){
+                    JOptionPane.showMessageDialog(null,"Please Fill All The TextField");
+                }
+            }
+        });
 
         nextbtn = new JButton("Next");
         nextbtn.setBackground(Color.BLACK);
@@ -239,15 +263,15 @@ public class Person_Details extends JFrame {
         nextbtn.setFont(new Font("Arial", Font.BOLD, 20));
         c.add(nextbtn);
         nextbtn.addActionListener(new ActionListener() {
-            int count = 1;
+
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                count++;
+                next++;
                 try{
                     String sql = "SELECT * FROM persondetails where id = ?";
                     PreparedStatement pstmt = conn.prepareStatement(sql);
-                    pstmt.setInt(1,count);
+                    pstmt.setInt(1,next);
                     ResultSet rs = pstmt.executeQuery();
                     if(rs.next()){
                         idtxt.setText(String.valueOf(rs.getInt("Id")));
