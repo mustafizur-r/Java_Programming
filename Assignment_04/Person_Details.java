@@ -204,7 +204,23 @@ public class Person_Details extends JFrame {
         firstbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                try {
+                    String sql = "select * from persondetails where id=?";
+                    PreparedStatement pstmt = conn.prepareStatement(sql);
+                    pstmt.setInt(1,Integer.parseInt(idtxt.getText()));
+                    ResultSet rs = pstmt.executeQuery();
+//                    Statement st = null;
+//                    ResultSet rs = st.executeQuery(sql);
+                    if(rs.next()){
+                        ftxt.setText(rs.getString("FirstName"));
+                        mtxt.setText(rs.getString("MiddleName"));
+                        ltxt.setText(rs.getString("LastName"));
+                        etxt.setText(rs.getString("Email"));
+                        phtxt.setText(rs.getString("Phone"));
+                    }
+                }catch (Exception f){
+                    JOptionPane.showMessageDialog(null,"Please Fill All The TextField");
+                }
             }
         });
 
