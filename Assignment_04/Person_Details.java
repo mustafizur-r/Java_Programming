@@ -1,5 +1,4 @@
-
-package assignment_04;
+package Assignment_04;
 
 import javax.swing.*;
 import java.awt.*;
@@ -191,8 +190,9 @@ public class Person_Details extends JFrame {
                 } catch (Exception d) {
                     JOptionPane.showMessageDialog(null,"Please Fill All The TextField");
                 }
-            }   
+            }
         });
+
 
 
         firstbtn = new JButton("First");
@@ -205,13 +205,14 @@ public class Person_Details extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-                    String sql = "select * from persondetails where id=?";
-                    PreparedStatement pstmt = conn.prepareStatement(sql);
-                    pstmt.setInt(1,Integer.parseInt(idtxt.getText()));
-                    ResultSet rs = pstmt.executeQuery();
-//                    Statement st = null;
-//                    ResultSet rs = st.executeQuery(sql);
+                    String sql = "select * from persondetails limit 1";
+//                    PreparedStatement pstmt = conn.prepareStatement(sql);
+//                    pstmt.setInt(1,Integer.parseInt(idtxt.getText()));
+//                    ResultSet rs = pstmt.executeQuery();
+                    Statement st = conn.createStatement();
+                    ResultSet rs = st.executeQuery(sql);
                     if(rs.next()){
+                        idtxt.setText(String.valueOf(rs.getInt("Id")));
                         ftxt.setText(rs.getString("FirstName"));
                         mtxt.setText(rs.getString("MiddleName"));
                         ltxt.setText(rs.getString("LastName"));
@@ -237,6 +238,32 @@ public class Person_Details extends JFrame {
         nextbtn.setBounds(600,400,110,30);
         nextbtn.setFont(new Font("Arial", Font.BOLD, 20));
         c.add(nextbtn);
+        nextbtn.addActionListener(new ActionListener() {
+            int count = 1;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                count++;
+                try{
+                    String sql = "SELECT * FROM persondetails where id = ?";
+                    PreparedStatement pstmt = conn.prepareStatement(sql);
+                    pstmt.setInt(1,count);
+                    ResultSet rs = pstmt.executeQuery();
+                    if(rs.next()){
+                        idtxt.setText(String.valueOf(rs.getInt("Id")));
+                        ftxt.setText(rs.getString("FirstName"));
+                        mtxt.setText(rs.getString("MiddleName"));
+                        ltxt.setText(rs.getString("LastName"));
+                        etxt.setText(rs.getString("Email"));
+                        phtxt.setText(rs.getString("Phone"));
+                    }
+
+                }catch (Exception f){
+                    JOptionPane.showMessageDialog(null,"Please Fill All The TextField");
+                }
+
+            }
+        });
 
         lastbtn = new JButton("Last");
         lastbtn.setBackground(Color.BLACK);
@@ -244,6 +271,27 @@ public class Person_Details extends JFrame {
         lastbtn.setBounds(710,400,110,30);
         lastbtn.setFont(new Font("Arial", Font.BOLD, 20));
         c.add(lastbtn);
+        lastbtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try{
+                    String sql = "SELECT * FROM persondetails ORDER BY id DESC limit 1";
+                    Statement st = conn.createStatement();
+                    ResultSet rs = st.executeQuery(sql);
+                    if(rs.next()){
+                        idtxt.setText(String.valueOf(rs.getInt("Id")));
+                        ftxt.setText(rs.getString("FirstName"));
+                        mtxt.setText(rs.getString("MiddleName"));
+                        ltxt.setText(rs.getString("LastName"));
+                        etxt.setText(rs.getString("Email"));
+                        phtxt.setText(rs.getString("Phone"));
+                    }
+
+                }catch (Exception f){
+                    JOptionPane.showMessageDialog(null,"Please Fill All The TextField");
+                }
+            }
+        });
 
       JLabel my = new JLabel("\u00A9"+" Developed By MMRSAJU");
       my.setForeground(Color.black);
@@ -259,5 +307,9 @@ public class Person_Details extends JFrame {
         ob.setDefaultCloseOperation(ob.EXIT_ON_CLOSE);
         ob.setResizable(false);
     }
+
+
+
+
 
 }
